@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+.tress:hover {
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: green;
+  transition: 700ms;
+  padding: 2px;
+  margin-left: 4px;
+  color: white;
+}

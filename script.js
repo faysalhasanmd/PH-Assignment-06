@@ -1,17 +1,20 @@
+let allPlants = [];
+
 const cardContainer = () => {
   const url = "https://openapi.programming-hero.com/api/plants";
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      allCard(data.plants);
+      allPlants = data.plants;
+      allCard(allPlants);
     });
 };
 
 const allCard = (values) => {
+  const cardItems = document.getElementById("card-container");
+  cardItems.innerHTML = "";
   values.forEach((value) => {
     // console.log(value.name, value.price);
-    const cardItems = document.getElementById("card-container");
-    // cardItems.innerHTML = "";
     const div = document.createElement("div");
     div.innerHTML = `
     <div class="bg-white rounded-[10px] p-2 h-[100%] hover:bg-gray-100 transition duration-700">
@@ -36,5 +39,22 @@ const allCard = (values) => {
     cardItems.appendChild(div);
   });
 };
+
+const filteringCard = (category) => {
+  if (category === "all") {
+    allCard(allPlants);
+  } else {
+    const filerCard = allPlants.filter((plant) => plant.category === category);
+    allCard(filerCard);
+  }
+
+  const categoryContainer = document.querySelectorAll(
+    "#categories-container h1.tress"
+  );
+  let buttons = categoryContainer.querySelectorAll("h1");
+  buttons.forEach((btn) => btn.classList.remove("active-category"));
+  Element.classList.add("active-category");
+};
+
 // call main func
 cardContainer();
