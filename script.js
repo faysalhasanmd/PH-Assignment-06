@@ -12,13 +12,13 @@ const cardContainer = () => {
     });
 };
 
-const openModal = (plant) => {
+const modalShow = (plant) => {
   document.getElementById("modal-title").innerText = plant.name;
   document.getElementById("modal-image").src = plant.image;
-  document.getElementById("modal-description").innerText = plant.description;
-  document.getElementById("modal-price").innerText = plant.price;
   document.getElementById("modal-category").innerText = plant.category;
-  document.getElementById("my_modal_1").showModal();
+  document.getElementById("modal-price").innerText = plant.price;
+  document.getElementById("modal-desc").innerText = plant.description;
+  document.getElementById("detailModal").showModal();
 };
 
 const dynamicCard = (values) => {
@@ -59,7 +59,7 @@ const dynamicCard = (values) => {
   for (const btn of buttons) {
     btn.addEventListener("click", (e) => {
       const name = e.currentTarget.getAttribute("data-name");
-      alert(name + " has been added to the cart...");
+      alert("➕" + name + " has been added to the cart...");
       const price = parseInt(e.currentTarget.getAttribute("data-price"));
 
       let countItems = cartItems.find((item) => item.name === name);
@@ -79,7 +79,7 @@ const dynamicCard = (values) => {
     btn.addEventListener("click", (e) => {
       const id = e.currentTarget.getAttribute("data-id");
       const plant = allPlants.find((p) => p.id == id);
-      openModal(plant);
+      modalShow(plant);
     });
   }
 };
