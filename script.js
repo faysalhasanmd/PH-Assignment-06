@@ -12,6 +12,10 @@ const cardContainer = () => {
     });
 };
 
+// ------------------modal------------------------
+
+// --------------------------------------------
+
 const dynamicCard = (values) => {
   const cardItems = document.getElementById("card-container");
   cardItems.innerHTML = "";
@@ -49,6 +53,7 @@ const dynamicCard = (values) => {
   for (const btn of buttons) {
     btn.addEventListener("click", (e) => {
       const name = e.currentTarget.getAttribute("data-name");
+      alert(name + " has been added to the cart...");
       const price = parseInt(e.currentTarget.getAttribute("data-price"));
 
       let countItems = cartItems.find((item) => item.name === name);
@@ -65,8 +70,8 @@ const dynamicCard = (values) => {
 };
 
 const history = () => {
-  const historyainer = document.getElementById("history-parent");
-  historyainer.innerHTML = `
+  const historyContainer = document.getElementById("history-parent");
+  historyContainer.innerHTML = `
   <button class="text-[20px] font-semibold border-amber-600 m-2">
             Your Cart
           </button>
@@ -97,7 +102,7 @@ const history = () => {
       history();
     });
 
-    historyainer.appendChild(div);
+    historyContainer.appendChild(div);
   });
 
   const totalAmount = document.createElement("div");
@@ -105,7 +110,7 @@ const history = () => {
   totalAmount.innerHTML = `
     Total = ${total}
     `;
-  historyainer.appendChild(totalAmount);
+  historyContainer.appendChild(totalAmount);
 };
 
 const filteringCard = (category) => {
