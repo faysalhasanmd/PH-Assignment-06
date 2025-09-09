@@ -27,6 +27,7 @@
   }
   .plant-tree {
     font-size: 26px;
+    margin-top: 26px;
   }
   .image-1,
   .image-2 {
@@ -73,6 +74,10 @@
     font-size: 12px;
   }
   .about-section {
+    display: flex;
+    flex-direction: column;
+  }
+  .logo {
     display: flex;
     flex-direction: column;
   }
