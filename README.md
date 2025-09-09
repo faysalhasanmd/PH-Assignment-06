@@ -11,9 +11,16 @@
     Map :
     Map() is used to transform the elements of an array and returns a new array with the transformed values, without changing the original array.
     Example:
-    const numbers = [1, 2, 3];
-    const double = numbers.map(name => name \* 2);
-    console.log(double);
+    const users = [
+
+{ id: 1, name: "Faysal" },
+{ id: 2, name: "Rahim" },
+{ id: 3, name: "Karim" }
+];
+const names = users.map(user => user.name);
+console.log(names);
+output :
+["Faysal", "Rahim", "Karim"]
 
         forEach:
         forEach() is used to loop through an array and perform an action on each element. It does not return anything.
@@ -30,9 +37,10 @@
 
     Arrow functions, introduced in ES6, are a short and modern way to write functions. They use the => syntax and are often used for small operations, callbacks, or array methods like map, filter, and forEach. Unlike traditional functions, arrow functions do not have their own this, which helps avoid common mistakes in object methods or event.
     Example :
-    const add = (a, b) => a + b;
-    const square = x => x \* x;
-    const greet = () => console.log("Hello!");
+    const add = (a, b) => {
+     return a + b;
+     };
+     const add = (a, b) => a + b;
 
 ### 4. How does destructuring assignment work in ES6?
 
