@@ -12,9 +12,14 @@ const cardContainer = () => {
     });
 };
 
-// ------------------modal------------------------
-
-// --------------------------------------------
+const openModal = (plant) => {
+  document.getElementById("modal-title").innerText = plant.name;
+  document.getElementById("modal-image").src = plant.image;
+  document.getElementById("modal-description").innerText = plant.description;
+  document.getElementById("modal-price").innerText = plant.price;
+  document.getElementById("modal-category").innerText = plant.category;
+  document.getElementById("my_modal_1").showModal();
+};
 
 const dynamicCard = (values) => {
   const cardItems = document.getElementById("card-container");
@@ -27,7 +32,8 @@ const dynamicCard = (values) => {
             <div
               class="flex w-[100%] m-auto bg-gray-300 h-[180px] rounded-[10px]"
             ><img class="w-full h-full object-cover rounded-tl-[10px] rounded-tr-[10px]" src="${value.image}" alt="" /></div>
-            <h1 class="text-[20px] font-semibold p-2 mb-2 mt-1">${value.name}</h1>
+            <h1 class="bg-[#f0fdf4] w-[130px] p-2 m-1.5 text-center rounded-full cursor-pointer hover:bg-green-200 show-modal"
+              data-id="${value.id}">${value.name}</h1>
             <p class="text-gray-400 p-2">
               ${value.description}
             </p>
@@ -67,6 +73,15 @@ const dynamicCard = (values) => {
       history();
     });
   }
+
+  const modalBtns = document.getElementsByClassName("show-modal");
+  for (const btn of modalBtns) {
+    btn.addEventListener("click", (e) => {
+      const id = e.currentTarget.getAttribute("data-id");
+      const plant = allPlants.find((p) => p.id == id);
+      openModal(plant);
+    });
+  }
 };
 
 const history = () => {
@@ -101,7 +116,6 @@ const history = () => {
       }
       history();
     });
-
     historyContainer.appendChild(div);
   });
 

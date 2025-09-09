@@ -193,7 +193,31 @@
     >
       <h1>© 2025 Green Earth. All Rights Reserved.</h1>
     </section>
-    <!--  -->
+    <!-- modal section -->
+    <section>
+      <dialog id="my_modal_1" class="modal">
+        <div class="modal-box">
+          <h3 class="text-lg font-bold" id="modal-title"></h3>
+          <img
+            id="modal-image"
+            class="w-full h-48 object-cover rounded-md mt-2"
+          />
+          <p class="py-2 text-gray-600" id="modal-description"></p>
+          <h1 class="font-semibold mt-2">
+            Price: ৳<span id="modal-price"></span>
+          </h1>
+          <h1 class="mt-1">
+            Category: <span id="modal-category" class="font-medium"></span>
+          </h1>
+
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+    </section>
     <script src="script.js"></script>
   </body>
 </html>
