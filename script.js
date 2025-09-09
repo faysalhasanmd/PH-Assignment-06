@@ -1,4 +1,6 @@
 let allPlants = [];
+let cartItems = [];
+let total = 0;
 
 const cardContainer = () => {
   const url = "https://openapi.programming-hero.com/api/plants";
@@ -6,11 +8,11 @@ const cardContainer = () => {
     .then((res) => res.json())
     .then((data) => {
       allPlants = data.plants;
-      allCard(allPlants);
+      dynamicCard(allPlants);
     });
 };
 
-const allCard = (values) => {
+const dynamicCard = (values) => {
   const cardItems = document.getElementById("card-container");
   cardItems.innerHTML = "";
   values.forEach((value) => {
@@ -30,7 +32,9 @@ const allCard = (values) => {
               <h1 class="font-semibold">৳ ${value.price}</h1>
             </div>
             <button
-              class="bg-green-700 text-white w-[100%] rounded-full flex justify-center m-auto p-1.5 hover:bg-green-800 "
+              class="bg-green-700 text-white w-[100%] rounded-full flex justify-center m-auto p-1.5 hover:bg-green-800 add-to-cart"
+              data-name="${value.name}"
+              data-price="${value.price}"
             >
               Add to your cart
             </button>
@@ -38,14 +42,63 @@ const allCard = (values) => {
     `;
     cardItems.appendChild(div);
   });
+
+  const buttons = document.getElementsByClassName("add-to-cart");
+  for (const btn of buttons) {
+    btn.addEventListener("click", (e) => {
+      const name = e.currentTarget.getAttribute("data-name");
+      const price = parseInt(e.currentTarget.getAttribute("data-price"));
+      cartItems.push({ name, price });
+      total += price;
+      historyCont();
+    });
+  }
+};
+
+const historyCont = () => {
+  const historyContainer = document.getElementById("history-parent");
+  historyContainer.innerHTML = `
+  <button class="text-[20px] font-semibold border-amber-600 m-2">
+            Your Cart
+          </button>
+  `;
+
+  cartItems.forEach((items, index) => {
+    const div = document.createElement("div");
+    div.innerHTML = `
+     <div
+            class="bg-[#cff0dc] w-[90%] m-auto p-2 rounded-[10px] flex justify-between mb-1.5"
+          >
+            <div>
+              <h1 class="text-[12px]">${items.name}</h1>
+              <h1 class="text-[12px]">৳${items.price}</h1>
+            </div>
+            <div><p class="h-[10px] cursor-default">❌</p></div>
+          </div>
+    `;
+    div.querySelector("p").addEventListener("click", () => {
+      total -= items.price;
+      cartItems.splice(index, 1);
+      historyCont();
+    });
+
+    historyContainer.appendChild(div);
+  });
+
+  const totalAmount = document.createElement("div");
+  totalAmount.className = "font-semibold text-right mr-4";
+  totalAmount.innerHTML = `
+    Total = ${total}
+    `;
+  historyContainer.appendChild(totalAmount);
 };
 
 const filteringCard = (category) => {
   if (category === "all") {
-    allCard(allPlants);
+    dynamicCard(allPlants);
   } else {
     const filerCard = allPlants.filter((plant) => plant.category === category);
-    allCard(filerCard);
+    dynamicCard(filerCard);
   }
 
   const categoryContainer = document.querySelectorAll(
@@ -55,6 +108,5 @@ const filteringCard = (category) => {
   buttons.forEach((btn) => btn.classList.remove("active-category"));
   Element.classList.add("active-category");
 };
-
 // call main func
 cardContainer();
