@@ -29,10 +29,10 @@ const dynamicCard = (values) => {
             </p>
             <div class="flex items-center justify-between mb-2 ">
               <h1 class="bg-[#f0fdf4] w-[130px] p-2 m-1.5 text-center rounded-full">${value.category}</h1>
-              <h1 class="font-semibold">৳ ${value.price}</h1>
+              <h1 class="font-semibold"> ৳${value.price}</h1>
             </div>
             <button
-              class="bg-green-700 text-white w-[100%] rounded-full flex justify-center m-auto p-1.5 hover:bg-green-800 add-to-cart"
+              class="bg-green-700 text-white w-[100%] mt-auto rounded-full flex justify-center m-auto p-1.5 hover:bg-green-800 add-to-cart"
               data-name="${value.name}"
               data-price="${value.price}"
             >
@@ -48,8 +48,15 @@ const dynamicCard = (values) => {
     btn.addEventListener("click", (e) => {
       const name = e.currentTarget.getAttribute("data-name");
       const price = parseInt(e.currentTarget.getAttribute("data-price"));
-      cartItems.push({ name, price });
-      total += price;
+
+      let countItems = cartItems.find((item) => item.name === name);
+      if (countItems) {
+        countItems.count += 1;
+        total += price;
+      } else {
+        cartItems.push({ name, price, count: 1 });
+        total += price;
+      }
       historyCont();
     });
   }
@@ -71,14 +78,20 @@ const historyCont = () => {
           >
             <div>
               <h1 class="text-[12px]">${items.name}</h1>
-              <h1 class="text-[12px]">৳${items.price}</h1>
+              
+              <h1 class="text-[12px]"><span class="text-[18px]">৳</span>${items.price} x ${items.count}</h1>
             </div>
             <div><p class="h-[10px] cursor-default">❌</p></div>
           </div>
     `;
     div.querySelector("p").addEventListener("click", () => {
-      total -= items.price;
-      cartItems.splice(index, 1);
+      if (items.count > 1) {
+        items.count -= 1;
+        total -= items.price;
+      } else {
+        total -= items.price;
+        cartItems.splice(index, 1);
+      }
       historyCont();
     });
 
@@ -100,13 +113,6 @@ const filteringCard = (category) => {
     const filerCard = allPlants.filter((plant) => plant.category === category);
     dynamicCard(filerCard);
   }
-
-  const categoryContainer = document.querySelectorAll(
-    "#categories-container h1.tress"
-  );
-  let buttons = categoryContainer.querySelectorAll("h1");
-  buttons.forEach((btn) => btn.classList.remove("active-category"));
-  Element.classList.add("active-category");
 };
 // call main func
 cardContainer();
