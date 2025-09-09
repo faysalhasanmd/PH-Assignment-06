@@ -28,7 +28,7 @@ const dynamicCard = (values) => {
               ${value.description}
             </p>
             <div class="flex items-center justify-between mb-2 ">
-              <h1 class="bg-[#f0fdf4] w-[130px] p-2 m-1.5 text-center rounded-full">${value.category}</h1>
+              <h1 class="bg-[#f0fdf4] w-[130px] p-2 m-1.5 text-center rounded-full ">${value.category}</h1>
               <h1 class="font-semibold"> ৳${value.price}</h1>
             </div>
             <button
@@ -57,14 +57,14 @@ const dynamicCard = (values) => {
         cartItems.push({ name, price, count: 1 });
         total += price;
       }
-      historyCont();
+      history();
     });
   }
 };
 
-const historyCont = () => {
-  const historyContainer = document.getElementById("history-parent");
-  historyContainer.innerHTML = `
+const history = () => {
+  const historyainer = document.getElementById("history-parent");
+  historyainer.innerHTML = `
   <button class="text-[20px] font-semibold border-amber-600 m-2">
             Your Cart
           </button>
@@ -92,10 +92,10 @@ const historyCont = () => {
         total -= items.price;
         cartItems.splice(index, 1);
       }
-      historyCont();
+      history();
     });
 
-    historyContainer.appendChild(div);
+    historyainer.appendChild(div);
   });
 
   const totalAmount = document.createElement("div");
@@ -103,7 +103,7 @@ const historyCont = () => {
   totalAmount.innerHTML = `
     Total = ${total}
     `;
-  historyContainer.appendChild(totalAmount);
+  historyainer.appendChild(totalAmount);
 };
 
 const filteringCard = (category) => {
@@ -114,5 +114,5 @@ const filteringCard = (category) => {
     dynamicCard(filerCard);
   }
 };
-// call main func
+// main function
 cardContainer();

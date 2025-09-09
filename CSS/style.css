@@ -9,3 +9,64 @@
   margin-left: 4px;
   color: white;
 }
+.hide {
+  display: none;
+}
+
+@media screen and (max-width: 576px) {
+  .navbar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  #green-title {
+    font-size: 20px;
+  }
+  .sub-title {
+    color: rgb(226, 136, 0);
+  }
+  .plant-tree {
+    font-size: 26px;
+  }
+  .image-1,
+  .image-2 {
+    display: none;
+  }
+  .banner {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .banner-btn {
+    margin-bottom: 14px;
+  }
+  .card-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  #history-parent {
+    width: 100%;
+  }
+  #card-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+  }
+  .categories-container {
+    width: 100%;
+  }
+  #flower {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .about-text {
+    font-size: 40px;
+  }
+  .salling {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+  }
+}
