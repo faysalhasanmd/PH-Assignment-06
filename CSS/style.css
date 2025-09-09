@@ -72,4 +72,8 @@
   .callback {
     font-size: 12px;
   }
+  .about-section {
+    display: flex;
+    flex-direction: column;
+  }
 }
